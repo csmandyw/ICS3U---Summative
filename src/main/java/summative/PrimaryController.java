@@ -32,6 +32,9 @@ public class PrimaryController {
 
     @FXML
     private MenuItem horizontalFlip;
+    
+    @FXML
+    private MenuItem verticalFlip;
 
     @FXML
     void onOpenImage(ActionEvent event) {
@@ -88,7 +91,24 @@ public class PrimaryController {
 
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                writer.setColor(width - i - 1, j, reader.getColor(i, j));
+                writer.setColor(i, height - j - 1, reader.getColor(i, j));
+            }
+        }
+        imageView.setImage(writableImage);
+    }
+
+    @FXML
+    void onVerticalFlip(ActionEvent event) {
+        int width = (int) imageView.getImage().getWidth();
+        int height = (int) imageView.getImage().getHeight();
+
+        WritableImage writableImage = new WritableImage(width, height);
+        PixelReader reader = imageView.getImage().getPixelReader();
+        PixelWriter writer = writableImage.getPixelWriter();
+
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                writer.setColor(width - j - 1, i, reader.getColor(i, j));
             }
         }
         imageView.setImage(writableImage);

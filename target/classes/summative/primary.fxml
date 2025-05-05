@@ -54,6 +54,18 @@
             <Menu mnemonicParsing="false" text="Transformation">
               <items>
                 <MenuItem fx:id="horizontalFlip" mnemonicParsing="false" onAction="#onHorizontalFlip" text="Horizontal Flip" />
+                  <MenuItem mnemonicParsing="false" text="Vertical Flip" />
+                  <MenuItem mnemonicParsing="false" text="Rotate" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="FIlters">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Effects">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
               </items>
             </Menu>
       </menus>
