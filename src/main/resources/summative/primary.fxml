@@ -35,7 +35,6 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
@@ -47,25 +46,29 @@
         <Menu mnemonicParsing="false" text="File">
                <items>
                   <MenuItem fx:id="openImage" mnemonicParsing="false" onAction="#onOpenImage" text="Open" />
+                  <MenuItem mnemonicParsing="false" text="Reset" />
                   <MenuItem fx:id="saveImage" mnemonicParsing="false" onAction="#onSaveImage" text="Save As" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
                </items>
         </Menu>
             <Menu mnemonicParsing="false" text="Transformation">
               <items>
                 <MenuItem fx:id="horizontalFlip" mnemonicParsing="false" onAction="#onHorizontalFlip" text="Horizontal Flip" />
-                  <MenuItem mnemonicParsing="false" text="Vertical Flip" />
-                  <MenuItem mnemonicParsing="false" text="Rotate" />
+                  <MenuItem fx:id="verticalFlip" mnemonicParsing="false" onAction="#onVerticalFlip" text="Vertical Flip" />
+                  <MenuItem fx:id="rotate" mnemonicParsing="false" onAction="#onRotate" text="Rotate" />
               </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="FIlters">
+            <Menu mnemonicParsing="false" text="Adjust">
               <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
+                <MenuItem mnemonicParsing="false" text="Brightness" />
+                  <MenuItem mnemonicParsing="false" text="Grayscale" />
+                  <MenuItem mnemonicParsing="false" text="Sepia" />
               </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Effects">
+            <Menu mnemonicParsing="false" text="Effect">
               <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
+                <MenuItem mnemonicParsing="false" text="Bulge" />
+                  <MenuItem mnemonicParsing="false" text="Gaussian Blur" />
+                  <MenuItem mnemonicParsing="false" text="Emboss" />
               </items>
             </Menu>
       </menus>

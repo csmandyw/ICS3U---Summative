@@ -37,6 +37,12 @@ public class PrimaryController {
     private MenuItem verticalFlip;
 
     @FXML
+    private MenuItem rotate;
+
+    @FXML
+    private MenuItem reset;
+
+    @FXML
     void onOpenImage(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Image File");
@@ -91,7 +97,7 @@ public class PrimaryController {
 
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                writer.setColor(i, height - j - 1, reader.getColor(i, j));
+                writer.setColor(width - i - 1, j, reader.getColor(i, j));
             }
         }
         imageView.setImage(writableImage);
@@ -108,10 +114,32 @@ public class PrimaryController {
 
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                writer.setColor(width - j - 1, i, reader.getColor(i, j));
+                writer.setColor(i, height - j - 1, reader.getColor(i, j));
             }
         }
         imageView.setImage(writableImage);
+    }
+
+    @FXML
+    void onRotate(ActionEvent event) {
+        int width = (int) imageView.getImage().getWidth();
+        int height = (int) imageView.getImage().getHeight();
+
+        WritableImage writableImage = new WritableImage(width, height);
+        PixelReader reader = imageView.getImage().getPixelReader();
+        PixelWriter writer = writableImage.getPixelWriter();
+
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                writer.setColor(j, height - i - 1, reader.getColor(i, j));
+            }
+        }
+        imageView.setImage(writableImage);
+    }
+
+    @FXML
+    void onReset(ActionEvent event) {
+        
     }
 
     /*
