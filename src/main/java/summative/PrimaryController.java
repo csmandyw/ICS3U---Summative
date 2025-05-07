@@ -29,6 +29,12 @@ public class PrimaryController {
 
     @FXML
     private MenuItem saveImage;
+    
+    @FXML
+    private MenuItem restore;
+
+    @FXML
+    private MenuItem exit;
 
     @FXML
     private MenuItem horizontalFlip;
@@ -37,11 +43,38 @@ public class PrimaryController {
     private MenuItem verticalFlip;
 
     @FXML
-    private MenuItem rotate;
+    private MenuItem rotation;
 
     @FXML
-    private MenuItem reset;
+    private MenuItem grayScale;
+    
+    @FXML
+    private MenuItem sepia;
 
+    @FXML
+    private MenuItem invertColour;
+    
+    @FXML
+    private MenuItem brightness;
+    
+    @FXML
+    private MenuItem bulge;
+
+    @FXML
+    private MenuItem colourOverlay;
+
+    @FXML
+    private MenuItem pixelation;
+
+    @FXML
+    private MenuItem vignette;
+
+    @FXML
+    private MenuItem edgeDetection;
+
+    @FXML
+    private MenuItem emboss;
+    
     @FXML
     void onOpenImage(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
@@ -86,6 +119,18 @@ public class PrimaryController {
         }
     }
 
+    // @FXML
+    // Image onRestore(ActionEvent event) {
+    //     // int width = (int) imageView.getImage().getWidth();
+    //     // int height = (int) imageView.getImage().getHeight();
+
+    // }
+
+    // @FXML
+    // void onExit(ActionEvent event) {
+        
+    // }
+
     @FXML
     void onHorizontalFlip(ActionEvent event) {
         int width = (int) imageView.getImage().getWidth();
@@ -121,7 +166,7 @@ public class PrimaryController {
     }
 
     @FXML
-    void onRotate(ActionEvent event) {
+    void onRotation(ActionEvent event) {
         int width = (int) imageView.getImage().getWidth();
         int height = (int) imageView.getImage().getHeight();
 
@@ -138,9 +183,65 @@ public class PrimaryController {
     }
 
     @FXML
-    void onReset(ActionEvent event) {
-        
+    void onGrayScale(ActionEvent event) {
+        int width = (int) imageView.getImage().getWidth();
+        int height = (int) imageView.getImage().getHeight();
+
+        WritableImage writableImage = new WritableImage(width, height);
+        PixelReader reader = imageView.getImage().getPixelReader();
+        PixelWriter writer = writableImage.getPixelWriter();
+
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                // Color newColor = new Color(red * 0.21, green * 0.71, blue * 0.07, color.getOpacity());
+            }
+        }
     }
+
+    @FXML
+    void onSepia(ActionEvent event) {
+
+    }
+
+    // @FXML
+    // void onInvertColour(ActionEvent event) {
+
+    // }
+
+    // @FXML
+    // void onBrightness(ActionEvent event) {
+
+    // }
+
+    // @FXML
+    // void onBulge(ActionEvent event) {
+
+    // }
+
+    // @FXML
+    // void onColourOverlay(ActionEvent event) {
+
+    // }
+
+    // @FXML
+    // void onPixelation(ActionEvent event) {
+
+    // }
+
+    // @FXML
+    // void onVignette(ActionEvent event) {
+
+    // }
+
+    // @FXML
+    // void onEdgeDetection(ActionEvent event) {
+
+    // }
+
+    // @FXML
+    // void onEmboss(ActionEvent event) {
+
+    // }
 
     /*
      * Accessing a pixels colors

@@ -35,6 +35,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
@@ -46,29 +47,36 @@
         <Menu mnemonicParsing="false" text="File">
                <items>
                   <MenuItem fx:id="openImage" mnemonicParsing="false" onAction="#onOpenImage" text="Open" />
-                  <MenuItem mnemonicParsing="false" text="Reset" />
                   <MenuItem fx:id="saveImage" mnemonicParsing="false" onAction="#onSaveImage" text="Save As" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem fx:id="restore" mnemonicParsing="false" onAction="#onRestore" text="Restore to Original" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" text="Exit" />
                </items>
         </Menu>
             <Menu mnemonicParsing="false" text="Transformation">
               <items>
                 <MenuItem fx:id="horizontalFlip" mnemonicParsing="false" onAction="#onHorizontalFlip" text="Horizontal Flip" />
                   <MenuItem fx:id="verticalFlip" mnemonicParsing="false" onAction="#onVerticalFlip" text="Vertical Flip" />
-                  <MenuItem fx:id="rotate" mnemonicParsing="false" onAction="#onRotate" text="Rotate" />
+                  <MenuItem fx:id="rotation" mnemonicParsing="false" onAction="#onRotation" text="Rotation" />
               </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Adjust">
+            <Menu mnemonicParsing="false" text="Colour">
               <items>
-                <MenuItem mnemonicParsing="false" text="Brightness" />
-                  <MenuItem mnemonicParsing="false" text="Grayscale" />
-                  <MenuItem mnemonicParsing="false" text="Sepia" />
+                  <MenuItem fx:id="grayScale" mnemonicParsing="false" text="Gray Scale" />
+                  <MenuItem fx:id="sepia" mnemonicParsing="false" text="Sepia Tone" />
+                  <MenuItem fx:id="invertColour" mnemonicParsing="false" text="Invert Colour" />
+                <MenuItem fx:id="brightness" mnemonicParsing="false" text="Brightness" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Effect">
               <items>
-                <MenuItem mnemonicParsing="false" text="Bulge" />
-                  <MenuItem mnemonicParsing="false" text="Gaussian Blur" />
-                  <MenuItem mnemonicParsing="false" text="Emboss" />
+                <MenuItem fx:id="bulge" mnemonicParsing="false" text="Bulge" />
+                  <MenuItem fx:id="colourOverlay" mnemonicParsing="false" text="Colour Overlay" />
+                  <MenuItem fx:id="pixelation" mnemonicParsing="false" text="Pixelation" />
+                  <MenuItem fx:id="vignette" mnemonicParsing="false" text="Vignette" />
+                  <MenuItem fx:id="edgeDetection" mnemonicParsing="false" text="Edge Detection" />
+                  <MenuItem fx:id="emboss" mnemonicParsing="false" text="Emboss" />
               </items>
             </Menu>
       </menus>
