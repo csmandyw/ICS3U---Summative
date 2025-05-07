@@ -49,7 +49,7 @@
                   <MenuItem fx:id="openImage" mnemonicParsing="false" onAction="#onOpenImage" text="Open" />
                   <MenuItem fx:id="saveImage" mnemonicParsing="false" onAction="#onSaveImage" text="Save As" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem fx:id="restore" mnemonicParsing="false" onAction="#onRestore" text="Restore to Original" />
+                  <MenuItem fx:id="restore" mnemonicParsing="false" text="Restore to Original" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" text="Exit" />
                </items>
@@ -63,7 +63,7 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Colour">
               <items>
-                  <MenuItem fx:id="grayScale" mnemonicParsing="false" text="Gray Scale" />
+                  <MenuItem fx:id="grayScale" mnemonicParsing="false" onAction="#onGrayScale" text="Gray Scale" />
                   <MenuItem fx:id="sepia" mnemonicParsing="false" text="Sepia Tone" />
                   <MenuItem fx:id="invertColour" mnemonicParsing="false" text="Invert Colour" />
                 <MenuItem fx:id="brightness" mnemonicParsing="false" text="Brightness" />

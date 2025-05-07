@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.io.File;
@@ -191,17 +192,25 @@ public class PrimaryController {
         PixelReader reader = imageView.getImage().getPixelReader();
         PixelWriter writer = writableImage.getPixelWriter();
 
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-                // Color newColor = new Color(red * 0.21, green * 0.71, blue * 0.07, color.getOpacity());
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                Color color = reader.getColor(x, y);
+                double red = color.getRed() * 0.21;
+                double green = color.getGreen() * 0.71;
+                double blue = color.getBlue() * 0.07;
+
+                double gray = red + green + blue;
+                Color newColor = new Color(gray, gray, gray, color.getOpacity());
+                writer.setColor(x, y, newColor);
             }
         }
+        imageView.setImage(writableImage);
     }
 
-    @FXML
-    void onSepia(ActionEvent event) {
+    // @FXML
+    // void onSepia(ActionEvent event) {
 
-    }
+    // }
 
     // @FXML
     // void onInvertColour(ActionEvent event) {
