@@ -64,9 +64,9 @@
             <Menu mnemonicParsing="false" text="Colour">
               <items>
                   <MenuItem fx:id="grayScale" mnemonicParsing="false" onAction="#onGrayScale" text="Gray Scale" />
-                  <MenuItem fx:id="sepia" mnemonicParsing="false" text="Sepia Tone" />
-                  <MenuItem fx:id="invertColour" mnemonicParsing="false" text="Invert Colour" />
-                <MenuItem fx:id="brightness" mnemonicParsing="false" text="Brightness" />
+                  <MenuItem fx:id="sepia" mnemonicParsing="false" onAction="#onSepia" text="Sepia Tone" />
+                  <MenuItem fx:id="invertColour" mnemonicParsing="false" onAction="#onInvertColour" text="Invert Colour" />
+                <MenuItem fx:id="brightness" mnemonicParsing="false" onAction="#onBrightness" text="Brightness" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Effect">
