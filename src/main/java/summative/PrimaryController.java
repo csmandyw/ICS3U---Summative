@@ -30,7 +30,7 @@ public class PrimaryController {
 
     @FXML
     private MenuItem saveImage;
-    
+
     @FXML
     private MenuItem restore;
 
@@ -39,7 +39,7 @@ public class PrimaryController {
 
     @FXML
     private MenuItem horizontalFlip;
-    
+
     @FXML
     private MenuItem verticalFlip;
 
@@ -48,16 +48,16 @@ public class PrimaryController {
 
     @FXML
     private MenuItem grayScale;
-    
+
     @FXML
     private MenuItem sepia;
 
     @FXML
     private MenuItem invertColour;
-    
+
     @FXML
     private MenuItem brightness;
-    
+
     @FXML
     private MenuItem bulge;
 
@@ -75,7 +75,7 @@ public class PrimaryController {
 
     @FXML
     private MenuItem emboss;
-    
+
     @FXML
     void onOpenImage(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
@@ -120,16 +120,14 @@ public class PrimaryController {
         }
     }
 
-    // @FXML
-    // Image onRestore(ActionEvent event) {
-    //     // int width = (int) imageView.getImage().getWidth();
-    //     // int height = (int) imageView.getImage().getHeight();
-
-    // // }
+    @FXML
+    void onRestore(ActionEvent event) {
+        imageView.setImage(originalImage);
+    }
 
     // @FXML
     // void onExit(ActionEvent event) {
-        
+
     // }
 
     @FXML
@@ -223,12 +221,11 @@ public class PrimaryController {
                 double green = color.getGreen();
                 double blue = color.getBlue();
 
-                double newRed = red * (0.393 * red + 0.769 * green + 0.189 * blue);
-                double newGreen = green * (0.348 * red + 0.686 * green + 0.168 * blue);
-                double newBlue = blue * (0.272 * red + 0.534 * green + 0.131 * blue);
-                
-                double sepia = Math.min(newRed + newGreen + newBlue, 1.0);
-                Color newColor = new Color(sepia, sepia, sepia, color.getOpacity());
+                double newRed = Math.min(0.393 * red + 0.769 * green + 0.189 * blue, 1.0);
+                double newGreen = Math.min(0.348 * red + 0.686 * green + 0.168 * blue, 1.0);
+                double newBlue = Math.min(0.272 * red + 0.534 * green + 0.131 * blue, 1.0);
+
+                Color newColor = new Color(newRed, newGreen, newBlue, color.getOpacity());
                 writer.setColor(x, y, newColor);
             }
         }

@@ -49,7 +49,7 @@
                   <MenuItem fx:id="openImage" mnemonicParsing="false" onAction="#onOpenImage" text="Open" />
                   <MenuItem fx:id="saveImage" mnemonicParsing="false" onAction="#onSaveImage" text="Save As" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem fx:id="restore" mnemonicParsing="false" text="Restore to Original" />
+                  <MenuItem fx:id="restore" mnemonicParsing="false" onAction="#onRestore" text="Restore to Original" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" text="Exit" />
                </items>
