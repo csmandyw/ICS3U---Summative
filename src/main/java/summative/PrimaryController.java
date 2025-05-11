@@ -125,10 +125,10 @@ public class PrimaryController {
         imageView.setImage(originalImage);
     }
 
-    // @FXML
-    // void onExit(ActionEvent event) {
-
-    // }
+    @FXML
+    void onExit(ActionEvent event) {
+        javafx.application.Platform.exit();
+    }
 
     @FXML
     void onHorizontalFlip(ActionEvent event) {
@@ -269,11 +269,15 @@ public class PrimaryController {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 Color color = reader.getColor(x, y);
-                double red = Math.min(color.getRed() + color.getRed() * brightness, 1.0);
-                double green = Math.min(color.getGreen() + color.getGreen() * brightness, 1.0);
-                double blue = Math.min(color.getBlue() + color.getBlue() * brightness, 1.0);
+                double red = color.getRed();
+                double green = color.getGreen();
+                double blue = color.getBlue();
 
-                Color newColor = new Color(red, green, blue, color.getOpacity());
+                double newRed = Math.min(red + red * brightness, 1.0);
+                double newGreen = Math.min(green + green * brightness, 1.0);
+                double newBlue = Math.min(blue + blue * brightness, 1.0);
+
+                Color newColor = new Color(newRed, newGreen, newBlue, color.getOpacity());
                 writer.setColor(x, y, newColor);
             }
         }
