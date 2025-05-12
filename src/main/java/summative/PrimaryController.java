@@ -248,7 +248,11 @@ public class PrimaryController {
                 double green = color.getGreen();
                 double blue = color.getBlue();
 
-                Color newColor = new Color(1.0 - red, 1.0 - green, 1.0 - blue, color.getOpacity());
+                double newRed = 1.0 - red;
+                double newGrean = 1.0 - green;
+                double newBlue = 1.0 - blue;
+
+                Color newColor = new Color(newRed, newGrean, newBlue, color.getOpacity());
                 writer.setColor(x, y, newColor);
             }
         }
@@ -284,14 +288,29 @@ public class PrimaryController {
         imageView.setImage(writableImage);
     }
 
+    @FXML
+    void onColourOverlay(ActionEvent event) {
+        int width = (int) imageView.getImage().getWidth();
+        int height = (int) imageView.getImage().getHeight();
+
+        WritableImage writableImage = new WritableImage(width, height);
+        PixelReader reader = imageView.getImage().getPixelReader();
+        PixelWriter writer = writableImage.getPixelWriter();
+
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                Color color = reader.getColor(x, y);
+                Color overlay = Color.DARKVIOLET;
+
+                writer.setColor(x, y, color.interpolate(overlay, 0.5));
+            }
+        }
+        imageView.setImage(writableImage);
+    }
+
     // @FXML
     // void onBulge(ActionEvent event) {
-
-    // }
-
-    // @FXML
-    // void onColourOverlay(ActionEvent event) {
-
+    //     // Math.atan2;
     // }
 
     // @FXML
