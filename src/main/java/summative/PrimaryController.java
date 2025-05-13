@@ -297,21 +297,51 @@ public class PrimaryController {
         PixelReader reader = imageView.getImage().getPixelReader();
         PixelWriter writer = writableImage.getPixelWriter();
 
+        Color overlay = Color.MAGENTA;
+
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 Color color = reader.getColor(x, y);
-                Color overlay = Color.DARKVIOLET;
-
-                writer.setColor(x, y, color.interpolate(overlay, 0.5));
+                
+                Color newColor = color.interpolate(overlay, 0.5);
+                writer.setColor(x, y, newColor);
             }
         }
         imageView.setImage(writableImage);
     }
 
-    // @FXML
-    // void onBulge(ActionEvent event) {
-    //     // Math.atan2;
-    // }
+    @FXML
+    void onBulge(ActionEvent event) {
+        int width = (int) imageView.getImage().getWidth();
+        int height = (int) imageView.getImage().getHeight();
+
+        WritableImage writableImage = new WritableImage(width, height);
+        PixelReader reader = imageView.getImage().getPixelReader();
+        PixelWriter writer = writableImage.getPixelWriter();
+
+        double cx = width / 2.0;
+        double cy = height / 2.0;
+
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+
+                double dx = x - cx;
+                double dy = y - cy;
+
+                double radius = Math.sqrt(dx * dx + dy * dy);
+                double theta = Math.atan2(dy, dx);
+                double newRadius = Math.pow(radius, 1.6) / 30.0;
+
+                int newX = (int) (cx + newRadius * Math.cos(theta));
+                int newY = (int) (cy + newRadius * Math.sin(theta));
+
+                if (newX >= 0 && newX < width && newY >= 0 && newY < height) {
+                    writer.setColor(x, y,reader.getColor(newX, newY));
+                }
+            }
+        }
+        imageView.setImage(writableImage);
+    }
 
     // @FXML
     // void onPixelation(ActionEvent event) {

@@ -71,7 +71,7 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Effect">
               <items>
-                <MenuItem fx:id="bulge" mnemonicParsing="false" text="Bulge" />
+                <MenuItem fx:id="bulge" mnemonicParsing="false" onAction="#onBulge" text="Bulge" />
                   <MenuItem fx:id="colourOverlay" mnemonicParsing="false" onAction="#onColourOverlay" text="Colour Overlay" />
                   <MenuItem fx:id="pixelation" mnemonicParsing="false" text="Pixelation" />
                   <MenuItem fx:id="vignette" mnemonicParsing="false" text="Vignette" />
