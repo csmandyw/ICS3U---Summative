@@ -308,10 +308,22 @@ public class PrimaryController {
         imageView.setImage(writableImage);
     }
 
-    // @FXML
-    // void onBulge(ActionEvent event) {
-    //     // Math.atan2;
-    // }
+    @FXML
+    void onBulge(ActionEvent event) {
+        int width = (int) imageView.getImage().getWidth();
+        int height = (int) imageView.getImage().getHeight();
+
+        WritableImage writableImage = new WritableImage(width, height);
+        PixelReader reader = imageView.getImage().getPixelReader();
+        PixelWriter writer = writableImage.getPixelWriter();
+
+        double dx = x - cx;
+
+        dy = y - cy;
+        
+
+        Math.atan2;
+    }
 
     // @FXML
     // void onPixelation(ActionEvent event) {
