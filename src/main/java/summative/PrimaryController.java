@@ -68,9 +68,6 @@ public class PrimaryController {
     private MenuItem pixelation;
 
     @FXML
-    private MenuItem noise;
-
-    @FXML
     private MenuItem vignette;
 
     @FXML
@@ -78,6 +75,9 @@ public class PrimaryController {
 
     @FXML
     private MenuItem emboss;
+
+    @FXML
+    private MenuItem noise;
 
     @FXML
     void onOpenImage(ActionEvent event) {
@@ -300,7 +300,7 @@ public class PrimaryController {
         PixelReader reader = imageView.getImage().getPixelReader();
         PixelWriter writer = writableImage.getPixelWriter();
 
-        Color overlay = Color.MAGENTA;
+        Color overlay = new Color(0.5, 0, 0.5, 0.5);
 
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
@@ -347,6 +347,32 @@ public class PrimaryController {
     }
 
     @FXML
+    void onPixelation(ActionEvent event) {
+        int width = (int) imageView.getImage().getWidth();
+        int height = (int) imageView.getImage().getHeight();
+
+        WritableImage writableImage = new WritableImage(width, height);
+        PixelReader reader = imageView.getImage().getPixelReader();
+        PixelWriter writer = writableImage.getPixelWriter();
+
+    }
+
+    // @FXML
+    // void onVignette(ActionEvent event) {
+
+    // }
+
+    // @FXML
+    // void onEdgeDetection(ActionEvent event) {
+
+    // }
+
+    // @FXML
+    // void onEmboss(ActionEvent event) {
+
+    // }
+
+    @FXML
     void onNoise(ActionEvent event) {
         int width = (int) imageView.getImage().getWidth();
         int height = (int) imageView.getImage().getHeight();
@@ -365,21 +391,6 @@ public class PrimaryController {
         }
         imageView.setImage(writableImage);
     }
-
-    // @FXML
-    // void onVignette(ActionEvent event) {
-
-    // }
-
-    // @FXML
-    // void onEdgeDetection(ActionEvent event) {
-
-    // }
-
-    // @FXML
-    // void onEmboss(ActionEvent event) {
-
-    // }
 
     /*
      * Accessing a pixels colors
