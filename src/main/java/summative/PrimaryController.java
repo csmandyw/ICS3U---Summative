@@ -53,7 +53,7 @@ public class PrimaryController {
     private MenuItem sepia;
 
     @FXML
-    private MenuItem invertColour;
+    private MenuItem invertColor;
 
     @FXML
     private MenuItem brightness;
@@ -62,7 +62,7 @@ public class PrimaryController {
     private MenuItem bulge;
 
     @FXML
-    private MenuItem colourOverlay;
+    private MenuItem colorOverlay;
 
     @FXML
     private MenuItem pixelation;
@@ -236,7 +236,7 @@ public class PrimaryController {
     }
 
     @FXML
-    void onInvertColour(ActionEvent event) {
+    void onInvertColor(ActionEvent event) {
         int width = (int) imageView.getImage().getWidth();
         int height = (int) imageView.getImage().getHeight();
 
@@ -292,7 +292,7 @@ public class PrimaryController {
     }
 
     @FXML
-    void onColourOverlay(ActionEvent event) {
+    void onColorOverlay(ActionEvent event) {
         int width = (int) imageView.getImage().getWidth();
         int height = (int) imageView.getImage().getHeight();
 
@@ -387,7 +387,7 @@ public class PrimaryController {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 double dist = Math.sqrt(Math.pow(x - cx, 2) + Math.pow(y - cy, 2));
-                double factor = Math.min(1 - dist / max, 0.3);
+                double factor = Math.max(1 - dist / max, 0.3);
 
                 Color color = reader.getColor(x, y);
                 Color newColor = color.deriveColor(0, 1, 1, factor);
@@ -417,20 +417,18 @@ public class PrimaryController {
                 double blue = 0;
 
                 for (int kx = 0; kx < kernelSize && x + kx < width; kx++) {
-                    for (int ky = 0; y < kernelSize && y + ky < height; y++) {
-                        Color colour = reader.getColor(x + kx - offset, y + ky - offset);
-                        double newRed = red + colour.getRed() * kernel[kx][ky]; // kinda no point in making new
-                                                                                // variables?
-                        double newGreen = green + colour.getGreen() * kernel[kx][ky];
-                        double newBlue = blue + colour.getBlue() * kernel[kx][ky];
+                    for (int ky = 0; y < kernelSize && y + ky < height; ky++) {
+                        Color color = reader.getColor(x + kx - offset, y + ky - offset);
+                        red = color.getRed() * kernel[kx][ky];
+                        green = color.getGreen() * kernel[kx][ky];
+                        blue = color.getBlue() * kernel[kx][ky];
 
-                        newRed = Math.max(0.0, Math.min(newRed, 1.0));
-                        newGreen = Math.max(0.0, Math.min(newGreen, 1.0));
-                        newBlue = Math.max(0.0, Math.min(newBlue, 1.0));
+                        red = Math.max(0.0, Math.min(red, 1.0));
+                        green = Math.max(0.0, Math.min(green, 1.0));
+                        blue = Math.max(0.0, Math.min(blue, 1.0));
 
-                        Color newColor = new Color(newRed, newGreen, newBlue, colour.getOpacity());
+                        Color newColor = new Color(red, green, blue, color.getOpacity());
                         writer.setColor(x, y, newColor);
-
                     }
                 }
             }
@@ -438,15 +436,44 @@ public class PrimaryController {
         imageView.setImage(writableImage);
     }
 
-    // @FXML
-    // void onEmboss(ActionEvent event) {
-    //     int width = (int) imageView.getImage().getWidth();
-    //     int height = (int) imageView.getImage().getHeight();
+    @FXML
+    void onEmboss(ActionEvent event) {
+        int width = (int) imageView.getImage().getWidth();
+        int height = (int) imageView.getImage().getHeight();
 
-    //     WritableImage writableImage = new WritableImage(width, height);
-    //     PixelReader reader = imageView.getImage().getPixelReader();
-    //     PixelWriter writer = writableImage.getPixelWriter();
-    // }
+        WritableImage writableImage = new WritableImage(width, height);
+        PixelReader reader = imageView.getImage().getPixelReader();
+        PixelWriter writer = writableImage.getPixelWriter();
+
+        double[][] kernel = { { -2, -1, 0 }, { -1, 1, 1 }, { 0, 1, 2 } };
+        int kernelSize = 3;
+        int offset = 0;
+
+        for (int x = offset; x < width; x++) {
+            for (int y = offset; y < height; y++) {
+                double red = 0;
+                double green = 0;
+                double blue = 0;
+
+                for (int kx = 0; kx < kernelSize && x + kx < width; kx++) {
+                    for (int ky = 0; y < kernelSize && y + ky < height; ky++) {
+                        Color color = reader.getColor(x + kx - offset, y + ky - offset);
+                        red = color.getRed() * kernel[kx][ky];
+                        green = color.getGreen() * kernel[kx][ky];
+                        blue = color.getBlue() * kernel[kx][ky];
+
+                        red = Math.max(0.0, Math.min(red, 1.0));
+                        green = Math.max(0.0, Math.min(green, 1.0));
+                        blue = Math.max(0.0, Math.min(blue, 1.0));
+
+                        Color newColor = new Color(red, green, blue, color.getOpacity());
+                        writer.setColor(x, y, newColor);
+                    }
+                }
+            }
+        }
+        imageView.setImage(writableImage);
+    }
 
     @FXML
     void onNoise(ActionEvent event) {
