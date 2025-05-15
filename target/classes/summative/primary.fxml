@@ -74,8 +74,8 @@
                 <MenuItem fx:id="bulge" mnemonicParsing="false" onAction="#onBulge" text="Bulge" />
                   <MenuItem fx:id="colourOverlay" mnemonicParsing="false" onAction="#onColourOverlay" text="Colour Overlay" />
                   <MenuItem fx:id="pixelation" mnemonicParsing="false" onAction="#onPixelation" text="Pixelation" />
-                  <MenuItem fx:id="vignette" mnemonicParsing="false" text="Vignette" />
-                  <MenuItem fx:id="edgeDetection" mnemonicParsing="false" text="Edge Detection" />
+                  <MenuItem fx:id="vignette" mnemonicParsing="false" onAction="#onVignette" text="Vignette" />
+                  <MenuItem fx:id="edgeDetection" mnemonicParsing="false" onAction="#onEdgeDetection" text="Edge Detection" />
                   <MenuItem fx:id="emboss" mnemonicParsing="false" text="Emboss" />
                   <MenuItem fx:id="noise" mnemonicParsing="false" onAction="#onNoise" text="Noise" />
               </items>
