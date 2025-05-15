@@ -373,7 +373,7 @@ public class PrimaryController {
 
     @FXML
     void onVignette(ActionEvent event) {
-         int width = (int) imageView.getImage().getWidth();
+        int width = (int) imageView.getImage().getWidth();
         int height = (int) imageView.getImage().getHeight();
 
         WritableImage writableImage = new WritableImage(width, height);
@@ -384,8 +384,8 @@ public class PrimaryController {
         double cy = height / 2.0;
         double max = Math.sqrt(cx * cx + cy * cy);
 
-        for (int x = 0; x < width; x ++) {
-            for (int y = 0; y < height; y ++) {
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
                 double dist = Math.sqrt(Math.pow(x - cx, 2) + Math.pow(y - cy, 2));
                 double factor = Math.min(1 - dist / max, 0.3);
 
@@ -397,14 +397,55 @@ public class PrimaryController {
         imageView.setImage(writableImage);
     }
 
-    // @FXML
-    // void onEdgeDetection(ActionEvent event) {
+    @FXML
+    void onEdgeDetection(ActionEvent event) {
+        int width = (int) imageView.getImage().getWidth();
+        int height = (int) imageView.getImage().getHeight();
 
-    // }
+        WritableImage writableImage = new WritableImage(width, height);
+        PixelReader reader = imageView.getImage().getPixelReader();
+        PixelWriter writer = writableImage.getPixelWriter();
+
+        double[][] kernel = { { 1, 1, 1 }, { 1, -7, 1 }, { 1, 1, 1 } };
+        int kernelSize = 3;
+        int offset = 0;
+
+        for (int x = offset; x < width; x++) {
+            for (int y = offset; y < height; y++) {
+                double red = 0;
+                double green = 0;
+                double blue = 0;
+
+                for (int kx = 0; kx < kernelSize && x + kx < width; kx++) {
+                    for (int ky = 0; y < kernelSize && y + ky < height; y++) {
+                        Color colour = reader.getColor(x + kx - offset, y + ky - offset);
+                        double newRed = red + colour.getRed() * kernel[kx][ky]; // kinda no point in making new
+                                                                                // variables?
+                        double newGreen = green + colour.getGreen() * kernel[kx][ky];
+                        double newBlue = blue + colour.getBlue() * kernel[kx][ky];
+
+                        newRed = Math.max(0.0, Math.min(newRed, 1.0));
+                        newGreen = Math.max(0.0, Math.min(newGreen, 1.0));
+                        newBlue = Math.max(0.0, Math.min(newBlue, 1.0));
+
+                        Color newColor = new Color(newRed, newGreen, newBlue, colour.getOpacity());
+                        writer.setColor(x, y, newColor);
+
+                    }
+                }
+            }
+        }
+        imageView.setImage(writableImage);
+    }
 
     // @FXML
     // void onEmboss(ActionEvent event) {
+    //     int width = (int) imageView.getImage().getWidth();
+    //     int height = (int) imageView.getImage().getHeight();
 
+    //     WritableImage writableImage = new WritableImage(width, height);
+    //     PixelReader reader = imageView.getImage().getPixelReader();
+    //     PixelWriter writer = writableImage.getPixelWriter();
     // }
 
     @FXML
