@@ -417,20 +417,20 @@ public class PrimaryController {
                 double blue = 0;
 
                 for (int kx = 0; kx < kernelSize && x + kx < width; kx++) {
-                    for (int ky = 0; y < kernelSize && y + ky < height; ky++) {
+                    for (int ky = 0; ky < kernelSize && y + ky < height; ky++) {
                         Color color = reader.getColor(x + kx - offset, y + ky - offset);
-                        red = color.getRed() * kernel[kx][ky];
-                        green = color.getGreen() * kernel[kx][ky];
-                        blue = color.getBlue() * kernel[kx][ky];
-
-                        red = Math.max(0.0, Math.min(red, 1.0));
-                        green = Math.max(0.0, Math.min(green, 1.0));
-                        blue = Math.max(0.0, Math.min(blue, 1.0));
-
-                        Color newColor = new Color(red, green, blue, color.getOpacity());
-                        writer.setColor(x, y, newColor);
+                        red += color.getRed() * kernel[kx][ky];
+                        green += color.getGreen() * kernel[kx][ky];
+                        blue += color.getBlue() * kernel[kx][ky];
                     }
                 }
+                red = Math.max(0.0, Math.min(red, 1.0));
+                green = Math.max(0.0, Math.min(green, 1.0));
+                blue = Math.max(0.0, Math.min(blue, 1.0));
+
+                Color originalColor = reader.getColor(x, y);
+                Color newColor = new Color(red, green, blue, originalColor.getOpacity());
+                writer.setColor(x, y, newColor);
             }
         }
         imageView.setImage(writableImage);
@@ -456,20 +456,20 @@ public class PrimaryController {
                 double blue = 0;
 
                 for (int kx = 0; kx < kernelSize && x + kx < width; kx++) {
-                    for (int ky = 0; y < kernelSize && y + ky < height; ky++) {
+                    for (int ky = 0; ky < kernelSize && y + ky < height; ky++) {
                         Color color = reader.getColor(x + kx - offset, y + ky - offset);
-                        red = color.getRed() * kernel[kx][ky];
-                        green = color.getGreen() * kernel[kx][ky];
-                        blue = color.getBlue() * kernel[kx][ky];
-
-                        red = Math.max(0.0, Math.min(red, 1.0));
-                        green = Math.max(0.0, Math.min(green, 1.0));
-                        blue = Math.max(0.0, Math.min(blue, 1.0));
-
-                        Color newColor = new Color(red, green, blue, color.getOpacity());
-                        writer.setColor(x, y, newColor);
+                        red += color.getRed() * kernel[kx][ky];
+                        green += color.getGreen() * kernel[kx][ky];
+                        blue += color.getBlue() * kernel[kx][ky];
                     }
                 }
+                red = Math.max(0.0, Math.min(red, 1.0));
+                green = Math.max(0.0, Math.min(green, 1.0));
+                blue = Math.max(0.0, Math.min(blue, 1.0));
+
+                Color originalColor = reader.getColor(x, y);
+                Color newColor = new Color(red, green, blue, originalColor.getOpacity());
+                writer.setColor(x, y, newColor);
             }
         }
         imageView.setImage(writableImage);
