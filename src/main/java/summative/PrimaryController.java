@@ -305,7 +305,7 @@ public class PrimaryController {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 Color color = reader.getColor(x, y);
-                
+
                 Color newColor = color.interpolate(overlay, 0.5);
                 writer.setColor(x, y, newColor);
             }
@@ -339,7 +339,7 @@ public class PrimaryController {
                 int newY = (int) (cy + newRadius * Math.sin(theta));
 
                 if (newX >= 0 && newX < width && newY >= 0 && newY < height) {
-                    writer.setColor(x, y,reader.getColor(newX, newY));
+                    writer.setColor(x, y, reader.getColor(newX, newY));
                 }
             }
         }
@@ -355,12 +355,47 @@ public class PrimaryController {
         PixelReader reader = imageView.getImage().getPixelReader();
         PixelWriter writer = writableImage.getPixelWriter();
 
+        int blockSize = 6;
+
+        for (int x = 0; x < width; x += blockSize) {
+            for (int y = 0; y < height; y += blockSize) {
+                Color color = reader.getColor(x, y);
+
+                for (int i = 0; i < blockSize && x + i < width; i++) {
+                    for (int j = 0; j < blockSize && y + j < height; j++) {
+                        writer.setColor(x + i, y + j, color);
+                    }
+                }
+            }
+        }
+        imageView.setImage(writableImage);
     }
 
-    // @FXML
-    // void onVignette(ActionEvent event) {
+    @FXML
+    void onVignette(ActionEvent event) {
+         int width = (int) imageView.getImage().getWidth();
+        int height = (int) imageView.getImage().getHeight();
 
-    // }
+        WritableImage writableImage = new WritableImage(width, height);
+        PixelReader reader = imageView.getImage().getPixelReader();
+        PixelWriter writer = writableImage.getPixelWriter();
+
+        double cx = width / 2.0;
+        double cy = height / 2.0;
+        double max = Math.sqrt(cx * cx + cy * cy);
+
+        for (int x = 0; x < width; x ++) {
+            for (int y = 0; y < height; y ++) {
+                double dist = Math.sqrt(Math.pow(x - cx, 2) + Math.pow(y - cy, 2));
+                double factor = Math.min(1 - dist / max, 0.3);
+
+                Color color = reader.getColor(x, y);
+                Color newColor = color.deriveColor(0, 1, 1, factor);
+                writer.setColor(x, y, newColor);
+            }
+        }
+        imageView.setImage(writableImage);
+    }
 
     // @FXML
     // void onEdgeDetection(ActionEvent event) {
