@@ -495,22 +495,6 @@ public class PrimaryController {
         imageView.setImage(writableImage);
     }
 
-    /*
-     * Accessing a pixels colors
-     * 
-     * Color color = reader.getColor(x, y);
-     * double red = color.getRed();
-     * double green = color.getGreen();
-     * double blue = color.getBlue();
-     */
-
-    /*
-     * Modifying a pixels colors
-     * 
-     * Color newColor = new Color(1.0 - red, 1.0 - green, 1.0 - blue,
-     * color.getOpacity());
-     */
-
     // DO NOT REMOVE THIS METHOD!
     public void setStage(Stage stage) {
         this.stage = stage;
