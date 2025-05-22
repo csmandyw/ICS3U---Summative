@@ -3,7 +3,9 @@ package summative;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelReader;
@@ -14,6 +16,9 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
+
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingFXUtils;
 import javax.imageio.ImageIO;
 
@@ -78,6 +83,9 @@ public class PrimaryController {
 
     @FXML
     private MenuItem noise;
+
+    @FXML
+    private Slider slider;
 
     @FXML
     void onOpenImage(ActionEvent event) {
@@ -289,6 +297,24 @@ public class PrimaryController {
             }
         }
         imageView.setImage(writableImage);
+    }
+
+    @FXML
+    void onSlider(ActionEvent event) {
+        Slider slider = new Slider(0, 10, 5);
+        Label value = new Label("");
+
+        slider.setShowTickMarks(true);
+        slider.setShowTickLabels(true);
+        slider.setMajorTickUnit(1);
+        slider.setBlockIncrement(1);
+        slider.setSnapToTicks(true);
+
+        slider.valueProperty().addListener(new ChangeListener<Number>() {
+            public void changed(ObservableValue<? extends Number> ov, Number oldValue, Number newValue) {
+                value.setText(newValue.toString());
+            }
+        });
     }
 
     @FXML
