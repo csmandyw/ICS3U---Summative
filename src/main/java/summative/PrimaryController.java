@@ -3,7 +3,6 @@ package summative;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
@@ -271,7 +270,25 @@ public class PrimaryController {
     }
 
     @FXML
+    void onBrightnessSlider() {
+        Slider slider = new Slider(0, 2, 1);
+
+        slider.setShowTickMarks(true);
+        slider.setShowTickLabels(true);
+        slider.setMajorTickUnit(0.5);
+        slider.setBlockIncrement(0.1);
+
+        slider.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                onBrightness(null);
+            }
+        });
+    }
+
+    @FXML
     void onBrightness(ActionEvent event) {
+
         int width = (int) imageView.getImage().getWidth();
         int height = (int) imageView.getImage().getHeight();
 
@@ -279,7 +296,7 @@ public class PrimaryController {
         PixelReader reader = imageView.getImage().getPixelReader();
         PixelWriter writer = writableImage.getPixelWriter();
 
-        double brightness = 0.2;
+        double brightness = slider.getValue() - 1;
 
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
@@ -297,24 +314,6 @@ public class PrimaryController {
             }
         }
         imageView.setImage(writableImage);
-    }
-
-    @FXML
-    void onSlider(ActionEvent event) {
-        Slider slider = new Slider(0, 10, 5);
-        Label value = new Label("");
-
-        slider.setShowTickMarks(true);
-        slider.setShowTickLabels(true);
-        slider.setMajorTickUnit(1);
-        slider.setBlockIncrement(1);
-        slider.setSnapToTicks(true);
-
-        slider.valueProperty().addListener(new ChangeListener<Number>() {
-            public void changed(ObservableValue<? extends Number> ov, Number oldValue, Number newValue) {
-                value.setText(newValue.toString());
-            }
-        });
     }
 
     @FXML
