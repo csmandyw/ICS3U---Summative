@@ -21,8 +21,8 @@ import java.io.IOException;
 // import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingFXUtils;
 import javax.imageio.ImageIO;
-import javax.imageio.ImageReader;
-import javax.swing.Action;
+// import javax.imageio.ImageReader;
+// import javax.swing.Action;
 
 public class PrimaryController {
 
@@ -91,6 +91,9 @@ public class PrimaryController {
 
     @FXML
     private MenuItem kawaii;
+
+    @FXML
+    private ImageView blush;
 
     @FXML
     void onOpenImage(ActionEvent event) {
@@ -277,18 +280,19 @@ public class PrimaryController {
 
     @FXML
     void onBrightnessSlider() {
-        Slider slider = new Slider(0, 2, 1);
-        double value = slider.getValue();
-        
-        slider.setShowTickMarks(true);
-        slider.setShowTickLabels(true);
-        slider.setMajorTickUnit(0.5);
-        slider.setBlockIncrement(0.1);
+        // Slider slider = new Slider(0, 2, 1);
+        // double value = slider.getValue();
+
+        // slider.setShowTickMarks(true);
+        // slider.setShowTickLabels(true);
+        // slider.setMajorTickUnit(0.5);
+        // slider.setBlockIncrement(0.1);
 
         // slider.valueProperty().addListener(new ChangeListener<Number>() {
-        //     public void changed(ObservableValue<? extends Number> ov, Number oldValue, Number newValue) {
-        //         value.setText(newValue.toString());
-        //     }
+        // public void changed(ObservableValue<? extends Number> ov, Number oldValue,
+        // Number newValue) {
+        // value.setText(newValue.toString());
+        // }
         // });
     }
 
@@ -526,15 +530,21 @@ public class PrimaryController {
         imageView.setImage(writableImage);
     }
 
-    // @FXML
-    // void onKawaii(ActionEvent event) {
-    //     Image image = new Image(file.(blushing.png).toString()) {
-    //     blush = image;
+    @FXML
+    void onKawaii(ActionEvent event) {
+        boolean blushFilter = false;
 
-    //     }
+        if (!blushFilter) {
+            Image filter = new Image(getClass().getResource("/images/blush.png").toExternalForm());
 
-    //    if (blush.isVisible() = )
-    // }
+            ImageView blush = new ImageView(filter);
+
+            blush.setImage(filter);
+            blush.setVisible(true);
+
+            blushFilter = true;
+        }
+    }
 
     // DO NOT REMOVE THIS METHOD!
     public void setStage(Stage stage) {

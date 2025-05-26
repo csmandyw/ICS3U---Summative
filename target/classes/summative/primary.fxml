@@ -91,12 +91,12 @@
             </Menu>
       </menus>
     </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <AnchorPane fx:id="blush" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
             <ImageView fx:id="imageView" fitHeight="724.0" fitWidth="750.0" layoutX="-22.0" layoutY="-13.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="blush" fitHeight="166.0" fitWidth="327.0" layoutX="206.0" layoutY="280.0" pickOnBounds="true" preserveRatio="true" visible="false">
+            <ImageView fx:id="blushFilter" fitHeight="166.0" fitWidth="327.0" layoutX="206.0" layoutY="280.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
-                  <Image url="@../../../../../Downloads/blushing.png" />
+                  <Image url="@../../../../../Downloads/blush.png" />
                </image>
             </ImageView>
       </children>
