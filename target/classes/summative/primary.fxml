@@ -37,6 +37,7 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.Slider?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
@@ -69,7 +70,7 @@
                   <MenuItem fx:id="invertColor" mnemonicParsing="false" onAction="#onInvertColor" text="Invert Color" />
                 <MenuItem fx:id="brightness" mnemonicParsing="false" onAction="#onBrightness" text="Brightness">
                      <graphic>
-                        <Slider fx:id="slider" blockIncrement="0.1" majorTickUnit="0.5" max="2.0" minorTickCount="0" onContextMenuRequested="#onBrightnessSlider" showTickLabels="true" showTickMarks="true" value="1.0" />
+                        <Slider fx:id="brightnessSlider" blockIncrement="0.1" majorTickUnit="0.5" max="2.0" minorTickCount="0" onContextMenuRequested="#onBrightnessSlider" onMouseClicked="#onBrightnessSlider" onMouseDragged="#onBrightnessSlider" showTickLabels="true" showTickMarks="true" value="1.0" />
                      </graphic></MenuItem>
               </items>
             </Menu>
@@ -83,11 +84,21 @@
                   <MenuItem fx:id="noise" mnemonicParsing="false" onAction="#onNoise" text="Noise" />
               </items>
             </Menu>
+            <Menu mnemonicParsing="false" text="Filter">
+              <items>
+                <MenuItem fx:id="kawaii" mnemonicParsing="false" onAction="#onKawaii" text="Kawaii Mode!! &gt;w&lt;" />
+              </items>
+            </Menu>
       </menus>
     </MenuBar>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
-            <ImageView fx:id="imageView" fitHeight="724.0" fitWidth="750.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imageView" fitHeight="724.0" fitWidth="750.0" layoutX="-22.0" layoutY="-13.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="blush" fitHeight="166.0" fitWidth="327.0" layoutX="206.0" layoutY="280.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../../../../../Downloads/blushing.png" />
+               </image>
+            </ImageView>
       </children>
     </AnchorPane>
   </children>

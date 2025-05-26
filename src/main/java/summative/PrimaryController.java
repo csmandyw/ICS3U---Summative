@@ -3,6 +3,7 @@ package summative;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+// import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
@@ -16,10 +17,12 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+// import javafx.beans.value.ChangeListener;
+// import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingFXUtils;
 import javax.imageio.ImageIO;
+import javax.imageio.ImageReader;
+import javax.swing.Action;
 
 public class PrimaryController {
 
@@ -84,7 +87,10 @@ public class PrimaryController {
     private MenuItem noise;
 
     @FXML
-    private Slider slider;
+    private Slider brightnessSlider;
+
+    @FXML
+    private MenuItem kawaii;
 
     @FXML
     void onOpenImage(ActionEvent event) {
@@ -272,18 +278,18 @@ public class PrimaryController {
     @FXML
     void onBrightnessSlider() {
         Slider slider = new Slider(0, 2, 1);
-
+        double value = slider.getValue();
+        
         slider.setShowTickMarks(true);
         slider.setShowTickLabels(true);
         slider.setMajorTickUnit(0.5);
         slider.setBlockIncrement(0.1);
 
-        slider.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                onBrightness(null);
-            }
-        });
+        // slider.valueProperty().addListener(new ChangeListener<Number>() {
+        //     public void changed(ObservableValue<? extends Number> ov, Number oldValue, Number newValue) {
+        //         value.setText(newValue.toString());
+        //     }
+        // });
     }
 
     @FXML
@@ -296,7 +302,7 @@ public class PrimaryController {
         PixelReader reader = imageView.getImage().getPixelReader();
         PixelWriter writer = writableImage.getPixelWriter();
 
-        double brightness = slider.getValue() - 1;
+        double brightness = 1;
 
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
@@ -519,6 +525,16 @@ public class PrimaryController {
         }
         imageView.setImage(writableImage);
     }
+
+    // @FXML
+    // void onKawaii(ActionEvent event) {
+    //     Image image = new Image(file.(blushing.png).toString()) {
+    //     blush = image;
+
+    //     }
+
+    //    if (blush.isVisible() = )
+    // }
 
     // DO NOT REMOVE THIS METHOD!
     public void setStage(Stage stage) {
