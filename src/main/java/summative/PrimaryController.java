@@ -530,21 +530,21 @@ public class PrimaryController {
         imageView.setImage(writableImage);
     }
 
-    @FXML
-    void onKawaii(ActionEvent event) {
-        boolean blushFilter = false;
+    // @FXML
+    // void onKawaii(ActionEvent event) {
+    //     boolean blushFilter = false;
 
-        if (!blushFilter) {
-            Image filter = new Image(getClass().getResource("/images/blush.png").toExternalForm());
+    //     if (!blushFilter) {
+    //         Image filter = new Image(getClass().getResource("/images/blush.png").toExternalForm());
 
-            ImageView blush = new ImageView(filter);
+    //         ImageView blush = new ImageView(filter);
 
-            blush.setImage(filter);
-            blush.setVisible(true);
+    //         blush.setImage(filter);
+    //         blush.setVisible(true);
 
-            blushFilter = true;
-        }
-    }
+    //         blushFilter = true;
+    //     }
+    // }
 
     // DO NOT REMOVE THIS METHOD!
     public void setStage(Stage stage) {
