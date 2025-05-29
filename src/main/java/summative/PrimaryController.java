@@ -90,12 +90,6 @@ public class PrimaryController {
     private Slider brightnessSlider;
 
     @FXML
-    private MenuItem kawaii;
-
-    @FXML
-    private ImageView blush;
-
-    @FXML
     void onOpenImage(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Image File");
@@ -529,22 +523,6 @@ public class PrimaryController {
         }
         imageView.setImage(writableImage);
     }
-
-    // @FXML
-    // void onKawaii(ActionEvent event) {
-    //     boolean blushFilter = false;
-
-    //     if (!blushFilter) {
-    //         Image filter = new Image(getClass().getResource("/images/blush.png").toExternalForm());
-
-    //         ImageView blush = new ImageView(filter);
-
-    //         blush.setImage(filter);
-    //         blush.setVisible(true);
-
-    //         blushFilter = true;
-    //     }
-    // }
 
     // DO NOT REMOVE THIS METHOD!
     public void setStage(Stage stage) {
