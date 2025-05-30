@@ -83,10 +83,14 @@
                   <MenuItem fx:id="noise" mnemonicParsing="false" onAction="#onNoise" text="Noise" />
               </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Filter" />
+            <Menu mnemonicParsing="false" text="Filter">
+              <items>
+                <MenuItem fx:id="blush" mnemonicParsing="false" onAction="#onBlush" text="Blush" />
+              </items>
+            </Menu>
       </menus>
     </MenuBar>
-    <AnchorPane fx:id="blush" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
             <ImageView fx:id="imageView" fitHeight="724.0" fitWidth="750.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
       </children>

@@ -3,7 +3,8 @@ package summative;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-// import javafx.scene.control.Label;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
@@ -16,13 +17,11 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
-// import javafx.beans.value.ChangeListener;
-// import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingFXUtils;
 import javax.imageio.ImageIO;
-// import javax.imageio.ImageReader;
-// import javax.swing.Action;
+import javax.swing.Action;
 
 public class PrimaryController {
 
@@ -88,6 +87,9 @@ public class PrimaryController {
 
     @FXML
     private Slider brightnessSlider;
+
+    @FXML
+    private MenuItem blush;
 
     @FXML
     void onOpenImage(ActionEvent event) {
@@ -519,6 +521,31 @@ public class PrimaryController {
             for (int y = 0; y < height; y += spacing) {
                 Color color = reader.getColor(x, y);
                 writer.setColor(x, y, color);
+            }
+        }
+        imageView.setImage(writableImage);
+    }
+
+@FXML
+    void onBlush(ActionEvent event) {
+        Image blushImage = new Image(getClass().getResource("/images/blush.png").toExternalForm());
+
+        int width = (int) originalImage.getWidth();
+        int height = (int) originalImage.getHeight();
+
+        WritableImage writableImage = new WritableImage(width, height);
+        PixelReader originalReader = originalImage.getPixelReader();
+        PixelReader blushReader = blushImage.getPixelReader();
+        PixelWriter writer = writableImage.getPixelWriter();
+
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                Color originalColor = originalReader.getColor(x, y);
+                Color blushColor = blushReader.getColor(x, y);
+                
+                Color blended = originalColor.interpolate(blushColor, 0.5);
+
+                writer.setColor(x, y, blended);
             }
         }
         imageView.setImage(writableImage);
