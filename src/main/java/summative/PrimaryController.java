@@ -59,8 +59,14 @@ public class PrimaryController {
     @FXML
     private MenuItem invertColor;
 
+    // @FXML
+    // private MenuItem brightness;
+
     @FXML
-    private MenuItem brightness;
+    private Slider slider;
+
+    @FXML
+    private MenuItem brightnessSlider;
 
     @FXML
     private MenuItem bulge;
@@ -82,9 +88,6 @@ public class PrimaryController {
 
     @FXML
     private MenuItem noise;
-
-    @FXML
-    private Slider brightnessSlider;
 
     @FXML
     private MenuItem blush;
@@ -273,8 +276,8 @@ public class PrimaryController {
     }
 
     @FXML
-    private void sliderChange(MouseEvent event) {
-        brightnessValue = brightnessSlider.getValue();
+    private void handleSliderChange(MouseEvent event) {
+        brightnessValue = slider.getValue();
     }
 
     @FXML
@@ -293,9 +296,9 @@ public class PrimaryController {
                 double green = color.getGreen();
                 double blue = color.getBlue();
 
-                double newRed = Math.min(red + red * brightnessValue, 1.0);
-                double newGreen = Math.min(green + green * brightnessValue, 1.0);
-                double newBlue = Math.min(blue + blue * brightnessValue, 1.0);
+                double newRed = Math.max(0, Math.min(red + brightnessValue, 1.0));
+                double newGreen = Math.max(0, Math.min(green + brightnessValue, 1.0));
+                double newBlue = Math.max(0, Math.min(blue + brightnessValue, 1.0));
 
                 Color newColor = new Color(newRed, newGreen, newBlue, color.getOpacity());
                 writer.setColor(x, y, newColor);
@@ -306,7 +309,6 @@ public class PrimaryController {
 
     // @FXML
     // void onBrightness(ActionEvent event) {
-
     // int width = (int) imageView.getImage().getWidth();
     // int height = (int) imageView.getImage().getHeight();
 
@@ -541,14 +543,9 @@ public class PrimaryController {
     @FXML
     void onBlush(ActionEvent event) {
         Image blushImage = new Image(getClass().getResource("/images/blush.png").toExternalForm());
-        ImageView v = new ImageView()
 
         int width = (int) originalImage.getWidth();
         int height = (int) originalImage.getHeight();
-
-        blushImage.setImage()
-        blushImage.setFitWidth(750);
-        blushImage.setPerservedRatio(true);
 
         WritableImage writableImage = new WritableImage(width, height);
         PixelReader originalReader = originalImage.getPixelReader();
@@ -557,22 +554,12 @@ public class PrimaryController {
 
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
-<<<<<<< HEAD
                 Color originalColor = originalReader.getColor(x, y);
                 Color blushColor = blushReader.getColor(x, y);
 
                 Color blended = originalColor.interpolate(blushColor, 0.5);
-=======
->>>>>>> 165056d7691966a9ced77325e943455e5a63f405
 
-                Color originalColor = originalReader.getColor(x, y);
-                Color blushColor = blushReader.getColor(x * 2, y * 2);
-
-                if (blushColor.getOpacity() != 0) {
-
-                    Color newColor = originalColor.interpolate(blushColor, 1.0);
-                    writer.setColor(x, y, newColor);
-                }
+                writer.setColor(x, y, blended);
             }
         }
         imageView.setImage(writableImage);
