@@ -541,9 +541,14 @@ public class PrimaryController {
     @FXML
     void onBlush(ActionEvent event) {
         Image blushImage = new Image(getClass().getResource("/images/blush.png").toExternalForm());
+        ImageView v = new ImageView()
 
         int width = (int) originalImage.getWidth();
         int height = (int) originalImage.getHeight();
+
+        blushImage.setImage()
+        blushImage.setFitWidth(750);
+        blushImage.setPerservedRatio(true);
 
         WritableImage writableImage = new WritableImage(width, height);
         PixelReader originalReader = originalImage.getPixelReader();
@@ -552,12 +557,22 @@ public class PrimaryController {
 
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
+<<<<<<< HEAD
                 Color originalColor = originalReader.getColor(x, y);
                 Color blushColor = blushReader.getColor(x, y);
 
                 Color blended = originalColor.interpolate(blushColor, 0.5);
+=======
+>>>>>>> 165056d7691966a9ced77325e943455e5a63f405
 
-                writer.setColor(x, y, blended);
+                Color originalColor = originalReader.getColor(x, y);
+                Color blushColor = blushReader.getColor(x * 2, y * 2);
+
+                if (blushColor.getOpacity() != 0) {
+
+                    Color newColor = originalColor.interpolate(blushColor, 1.0);
+                    writer.setColor(x, y, newColor);
+                }
             }
         }
         imageView.setImage(writableImage);
