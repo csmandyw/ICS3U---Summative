@@ -3,8 +3,6 @@ package summative;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
@@ -12,21 +10,21 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 
 import javafx.embed.swing.SwingFXUtils;
 import javax.imageio.ImageIO;
-import javax.swing.Action;
 
 public class PrimaryController {
 
     private Stage stage;
     private Image originalImage; // Use this to keep track of the original image
+    private double brightnessValue;
 
     @FXML
     private ImageView imageView;
@@ -275,34 +273,18 @@ public class PrimaryController {
     }
 
     @FXML
-    void onBrightnessSlider() {
-        // Slider slider = new Slider(0, 2, 1);
-        // double value = slider.getValue();
-
-        // slider.setShowTickMarks(true);
-        // slider.setShowTickLabels(true);
-        // slider.setMajorTickUnit(0.5);
-        // slider.setBlockIncrement(0.1);
-
-        // slider.valueProperty().addListener(new ChangeListener<Number>() {
-        // public void changed(ObservableValue<? extends Number> ov, Number oldValue,
-        // Number newValue) {
-        // value.setText(newValue.toString());
-        // }
-        // });
+    private void sliderChange(MouseEvent event) {
+        brightnessValue = brightnessSlider.getValue();
     }
 
     @FXML
-    void onBrightness(ActionEvent event) {
-
+    void onBrightnessSlider() {
         int width = (int) imageView.getImage().getWidth();
         int height = (int) imageView.getImage().getHeight();
 
         WritableImage writableImage = new WritableImage(width, height);
         PixelReader reader = imageView.getImage().getPixelReader();
         PixelWriter writer = writableImage.getPixelWriter();
-
-        double brightness = 1;
 
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
@@ -311,9 +293,9 @@ public class PrimaryController {
                 double green = color.getGreen();
                 double blue = color.getBlue();
 
-                double newRed = Math.min(red + red * brightness, 1.0);
-                double newGreen = Math.min(green + green * brightness, 1.0);
-                double newBlue = Math.min(blue + blue * brightness, 1.0);
+                double newRed = Math.min(red + red * brightnessValue, 1.0);
+                double newGreen = Math.min(green + green * brightnessValue, 1.0);
+                double newBlue = Math.min(blue + blue * brightnessValue, 1.0);
 
                 Color newColor = new Color(newRed, newGreen, newBlue, color.getOpacity());
                 writer.setColor(x, y, newColor);
@@ -321,6 +303,36 @@ public class PrimaryController {
         }
         imageView.setImage(writableImage);
     }
+
+    // @FXML
+    // void onBrightness(ActionEvent event) {
+
+    // int width = (int) imageView.getImage().getWidth();
+    // int height = (int) imageView.getImage().getHeight();
+
+    // WritableImage writableImage = new WritableImage(width, height);
+    // PixelReader reader = imageView.getImage().getPixelReader();
+    // PixelWriter writer = writableImage.getPixelWriter();
+
+    // double brightness = 1;
+
+    // for (int x = 0; x < width; x++) {
+    // for (int y = 0; y < height; y++) {
+    // Color color = reader.getColor(x, y);
+    // double red = color.getRed();
+    // double green = color.getGreen();
+    // double blue = color.getBlue();
+
+    // double newRed = Math.min(red + red * brightness, 1.0);
+    // double newGreen = Math.min(green + green * brightness, 1.0);
+    // double newBlue = Math.min(blue + blue * brightness, 1.0);
+
+    // Color newColor = new Color(newRed, newGreen, newBlue, color.getOpacity());
+    // writer.setColor(x, y, newColor);
+    // }
+    // }
+    // imageView.setImage(writableImage);
+    // }
 
     @FXML
     void onColorOverlay(ActionEvent event) {
@@ -526,7 +538,7 @@ public class PrimaryController {
         imageView.setImage(writableImage);
     }
 
-@FXML
+    @FXML
     void onBlush(ActionEvent event) {
         Image blushImage = new Image(getClass().getResource("/images/blush.png").toExternalForm());
 
@@ -542,7 +554,7 @@ public class PrimaryController {
             for (int x = 0; x < width; x++) {
                 Color originalColor = originalReader.getColor(x, y);
                 Color blushColor = blushReader.getColor(x, y);
-                
+
                 Color blended = originalColor.interpolate(blushColor, 0.5);
 
                 writer.setColor(x, y, blended);
