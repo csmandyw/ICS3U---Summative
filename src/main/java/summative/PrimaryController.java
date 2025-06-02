@@ -559,7 +559,7 @@ public class PrimaryController {
         double blushWidth = blushImage.getWidth() * 0.2;
         double blushHeight = blushImage.getHeight() * 0.5;
         double cx = width * 0.5 - blushWidth * 0.5;
-        double cy = height * 0.8 - blushHeight * 0.4;
+        double cy = height * 0.5 - blushHeight * 0.5;
 
         gc.drawImage(blushImage, cx, cy, blushWidth, blushHeight);
 
