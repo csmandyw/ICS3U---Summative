@@ -2,6 +2,8 @@ package summative;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Alert;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Slider;
@@ -542,27 +544,27 @@ public class PrimaryController {
 
     @FXML
     void onBlush(ActionEvent event) {
-        Image blushImage = new Image(getClass().getResource("/images/blush.png").toExternalForm());
+        Image blushImage = new Image(getClass().getResource("/images/blush2.png").toExternalForm());
 
         int width = (int) originalImage.getWidth();
         int height = (int) originalImage.getHeight();
 
-        WritableImage writableImage = new WritableImage(width, height);
-        PixelReader originalReader = originalImage.getPixelReader();
-        PixelReader blushReader = blushImage.getPixelReader();
-        PixelWriter writer = writableImage.getPixelWriter();
+        WritableImage newImage = new WritableImage(width, height);
 
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
-                Color originalColor = originalReader.getColor(x, y);
-                Color blushColor = blushReader.getColor(x, y);
+        Canvas canvas = new Canvas(width, height);
+        GraphicsContext gc = canvas.getGraphicsContext2D();
 
-                Color blended = originalColor.interpolate(blushColor, 0.5);
+        gc.drawImage(originalImage, 0, 0, width, height);
 
-                writer.setColor(x, y, blended);
-            }
-        }
-        imageView.setImage(writableImage);
+        double blushWidth = blushImage.getWidth() * 0.2;
+        double blushHeight = blushImage.getHeight() * 0.5;
+        double cx = width * 0.5 - blushWidth * 0.5;
+        double cy = height * 0.8 - blushHeight * 0.4;
+
+        gc.drawImage(blushImage, cx, cy, blushWidth, blushHeight);
+
+        canvas.snapshot(null, newImage);
+        imageView.setImage(newImage);
     }
 
     // DO NOT REMOVE THIS METHOD!
