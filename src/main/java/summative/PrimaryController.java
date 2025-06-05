@@ -544,7 +544,7 @@ public class PrimaryController {
 
     @FXML
     void onBlush(ActionEvent event) {
-        Image blushImage = new Image(getClass().getResource("/images/blush2.png").toExternalForm());
+        Image blushImage = new Image(getClass().getResource("/images/blush.png").toExternalForm());
 
         int width = (int) originalImage.getWidth();
         int height = (int) originalImage.getHeight();
