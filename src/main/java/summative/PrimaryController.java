@@ -95,6 +95,9 @@ public class PrimaryController {
     private MenuItem blush;
 
     @FXML
+    private MenuItem dog;
+
+    @FXML
     void onOpenImage(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Image File");
@@ -562,6 +565,31 @@ public class PrimaryController {
         double cy = height * 0.32 - blushHeight * 0.32;
 
         gc.drawImage(blushImage, cx, cy, blushWidth, blushHeight);
+
+        canvas.snapshot(null, newImage);
+        imageView.setImage(newImage);
+    }
+
+    @FXML
+    void onDog(ActionEvent event) {
+        Image dogImage = new Image(getClass().getResource("/images/dog2.png").toExternalForm());
+
+        int width = (int) originalImage.getWidth();
+        int height = (int) originalImage.getHeight();
+
+        WritableImage newImage = new WritableImage(width, height);
+
+        Canvas canvas = new Canvas(width, height);
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+
+        gc.drawImage(originalImage, 0, 0, width, height);
+
+        double dogWidth = dogImage.getWidth() * 0.5;
+        double dogHeight = dogImage.getHeight() * 0.5;
+        double cx = width * 0.84 - dogWidth * 0.84;
+        double cy = height * 0.56 - dogHeight * 0.56;
+
+        gc.drawImage(dogImage, cx, cy, dogWidth, dogHeight);
 
         canvas.snapshot(null, newImage);
         imageView.setImage(newImage);

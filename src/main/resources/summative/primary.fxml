@@ -86,6 +86,7 @@
             <Menu mnemonicParsing="false" text="Filter">
               <items>
                 <MenuItem fx:id="blush" mnemonicParsing="false" onAction="#onBlush" text="Blush" />
+                  <MenuItem fx:id="dog" mnemonicParsing="false" onAction="#onDog" text="Dog" />
               </items>
             </Menu>
       </menus>
