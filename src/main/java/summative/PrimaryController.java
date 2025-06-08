@@ -572,7 +572,7 @@ public class PrimaryController {
 
     @FXML
     void onDog(ActionEvent event) {
-        Image dogImage = new Image(getClass().getResource("/images/dog2.png").toExternalForm());
+        Image dogImage = new Image(getClass().getResource("/images/dog.png").toExternalForm());
 
         int width = (int) originalImage.getWidth();
         int height = (int) originalImage.getHeight();
