@@ -584,10 +584,10 @@ public class PrimaryController {
 
         gc.drawImage(originalImage, 0, 0, width, height);
 
-        double dogWidth = dogImage.getWidth() * 0.5;
-        double dogHeight = dogImage.getHeight() * 0.5;
-        double cx = width * 0.67 - dogWidth * 0.67;
-        double cy = height * 0.56 - dogHeight * 0.56;
+        double dogWidth = dogImage.getWidth() * 0.34;
+        double dogHeight = dogImage.getHeight() * 0.34;
+        double cx = width * 0.4 - dogWidth * 0.4;
+        double cy = height * 0.2 - dogHeight * 0.2;
 
         gc.drawImage(dogImage, cx, cy, dogWidth, dogHeight);
 
