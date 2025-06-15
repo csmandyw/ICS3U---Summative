@@ -270,10 +270,10 @@ public class PrimaryController {
                 double blue = color.getBlue();
 
                 double newRed = 1.0 - red;
-                double newGrean = 1.0 - green;
+                double newGreen = 1.0 - green;
                 double newBlue = 1.0 - blue;
 
-                Color newColor = new Color(newRed, newGrean, newBlue, color.getOpacity());
+                Color newColor = new Color(newRed, newGreen, newBlue, color.getOpacity());
                 writer.setColor(x, y, newColor);
             }
         }
