@@ -83,7 +83,7 @@
                   <MenuItem fx:id="noise" mnemonicParsing="false" onAction="#onNoise" text="Noise" />
               </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Filter">
+            <Menu mnemonicParsing="false" text="Qayumfx">
               <items>
                 <MenuItem fx:id="blush" mnemonicParsing="false" onAction="#onBlush" text="Blush" />
                   <MenuItem fx:id="dog" mnemonicParsing="false" onAction="#onDog" text="Dog" />
